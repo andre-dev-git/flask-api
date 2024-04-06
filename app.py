@@ -27,7 +27,7 @@ def getCourse(id):
 def addCourse():
     if request.is_json:
         course = request.get_json()
-        idNewCourse = random.randint(100000, 999999);
+        idNewCourse = random.randint(100000, 999999)
         while True:
             try:
                 dataset[idNewCourse]
@@ -44,7 +44,7 @@ def updateCourse(id):
         try:
             dataset[id]
         except KeyError:
-            return {"erro":"ID não encontrado"}, 415
+            return {"erro":"ID não encontrado"}, 404
         course = request.get_json()
         dataset[id].update(course)    
         return {"msg":"Sucesso", "course": dataset[id]}, 200
@@ -55,7 +55,7 @@ def deleteCourse(id):
     try:
         dataset[id]
     except KeyError:
-        return {"erro":"ID não encontrado"}, 415
+        return {"erro":"ID não encontrado"}, 404
     del dataset[id]
     return {"msg": 'Sucesso!'}, 200
 
